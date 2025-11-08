@@ -1,16 +1,3 @@
-/**
- * ========================================================================================
- * Script de Automação de Modais - Bootstrap Select (Final com reload automático)
- * ========================================================================================
- * Descrição:
- * - Percorre todos os modais da página com botão `editarNaoConformidade`.
- * - Clica no dropdown ("Não"), seleciona "Sim".
- * - Clica no botão "Atualizar" e fecha o modal.
- * - Controla janelas abertas (limite configurável).
- * - Recarrega a página principal ao final do processo.
- * ========================================================================================
- */
-
 (function() {
   const MAXIMO_DE_JANELAS_ABERTAS = 3;
   const janelasAbertasPeloScript = [];
@@ -84,7 +71,7 @@
 
     // 5. Espera e fecha modal
     await new Promise(r => setTimeout(r, 1500));
-    if ($('.modal.in').length > 0) $('.modal.in').modal('hide');
+    if (window.jQuery && $('.modal.in').length > 0) $('.modal.in').modal('hide');
 
     // 6. Fecha janelas se exceder limite
     if (janelasAbertasPeloScript.length >= MAXIMO_DE_JANELAS_ABERTAS) {
@@ -113,7 +100,7 @@
     console.log('✅ Todos os modais foram processados.');
     fecharTodasAsJanelas();
 
-    // 7. Atualiza a página principal ao final
+    // 7. Atualiza a página ao final
     console.log('🔄 Recarregando a página...');
     await new Promise(r => setTimeout(r, 2000));
     location.reload();
